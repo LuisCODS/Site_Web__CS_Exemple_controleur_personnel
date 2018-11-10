@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Web.UI;
 
 public partial class _Default : Page
@@ -111,10 +112,7 @@ public partial class _Default : Page
                     Response.Write("**********************************<br><br>");
                 }
                 //Close(); pas necessaire, car using le ferme deja
-                //if (string.IsNullOrEmpty(ligne))
-                //{
-                //    Response.Write("Pas de registre encore !");
-                //}
+
 
             }
         } catch (IOException e){
@@ -190,7 +188,7 @@ public partial class _Default : Page
     {
         //Response.Write("<h3>Fim a modifier " + num + " mais les étudiants vont s'en occuper</h3>");
 
-        //Get the news dates from Form...
+        //Get the news dates to be add...
         string num;
         string titre;
         string res;
@@ -207,12 +205,6 @@ public partial class _Default : Page
         //Call enregistrer...
         enregistrerMembres("films.txt", num, titre, duree, res);
 
-        
-
-        
-
-
-
     }
 
     //A COMPLETER EN EXERCICE
@@ -221,9 +213,25 @@ public partial class _Default : Page
         //File.Copy("leFichier", "destFileCopy");
         //File.Move("leFichier", "destFileToeMove");
         //File.Delete("leFichier");
+        string chemin = Server.MapPath("./") + leFichier;
+        string fichierTemp = Server.MapPath("./") + "example.txt";
 
-       
-    }
+        bool exists = (from line in File.ReadAllLines(chemin)
+                       where line == numf
+                       select line).Count() > 0;
+
+        string[] lines = File.ReadAllLines(chemin);
+
+            foreach (string line in lines)
+            {
+
+            }
+        
+
+    }//fin methode
+
+
+
    
    
 }
